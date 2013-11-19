@@ -1,0 +1,25 @@
+{
+  "name": "fiv/spl",
+  "description": "Standard library",
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-0": {
+      "Fiv\\Spl\\": "src/"
+    }
+  },
+  "license": "GPL v2",
+  "authors": [
+    {
+      "name": "Ivan Shcherbak",
+      "email": "dev@funivan.com"
+    }
+  ],
+  "require-dev": {
+    "behat/behat": "2.4.*@stable"
+  },
+  "config": {
+    "bin-dir": "bin/"
+  }
+
+}
