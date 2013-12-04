@@ -5,8 +5,10 @@
    */
   namespace Fiv\Spl;
 
-  use Fiv\Tokenizer\Collection;
-
+  /**
+   *
+   * @package Fiv\Spl
+   */
   abstract class ObjectCollection implements \Iterator, \ArrayAccess, \Countable {
 
     protected $position = 0;
@@ -17,7 +19,6 @@
      * @var []
      */
     protected $items = [];
-
 
     /**
      * @param array $items
@@ -85,6 +86,12 @@
       return $this;
     }
 
+    /**
+     * @param int $index
+     * @param array $items
+     * @return $this
+     * @throws \Exception
+     */
     public function addAfter($index, $items) {
       if (!is_array($items)) {
         throw new \Exception('You can add after only array of objects');
@@ -115,16 +122,6 @@
       return $this;
     }
 
-
-    /**
-     * Return number of items in current collection
-     *
-     * @return int
-     */
-    public function num() {
-      return count($this->items);
-    }
-
     /**
      * Remove part of items from collection
      * Works as array_slice
@@ -143,15 +140,15 @@
      * Take part of items and return new collection
      * Works as array_slice
      *
-     * @param int  $offset
+     * @param int $offset
      * @param null $length
-     * @return
-     * @return object
+     * @return self
      */
     public function extractItems($offset, $length = null) {
       $items = array_slice($this->items, $offset, $length);
 
       $className = get_called_class();
+      /** @var $collection ObjectCollection */
       $collection = new $className();
       $collection->setItems($items);
 
@@ -166,6 +163,10 @@
       $this->items = array_values($this->items);
     }
 
+    /**
+     * You can rewrite this method
+     * Use refresh for extra logic. For example: delete invalid items from collection
+     */
     public function refresh() {
       $this->rewind();
     }
@@ -248,7 +249,7 @@
      * Add item to the end or modify item with given key
      *
      * @param int|null $offset
-     * @param object   $item
+     * @param object $item
      * @throws \Exception
      * @return $this|void
      */
@@ -296,7 +297,7 @@
     /**
      * Return array of items connected to this collection
      *
-     *You can use it in foreach for better code suggestion
+     * You can use it in foreach for better code suggestion
      * Rewrite this method in you class
      *
      * <code>
@@ -314,7 +315,7 @@
     /**
      * Check array of objects.
      *
-     * @param array  $items
+     * @param array $items
      * @param string $message
      * @throws \Exception
      */
@@ -328,7 +329,7 @@
     }
 
     /**
-     * Check item
+     * You can add or append only one type of object to collection
      *
      * @param $item
      * @param $message
@@ -341,6 +342,7 @@
     }
 
     /**
+     * Iterate over objects in collection
      *
      * <code>
      * $collection->map(function($item, $index, $collection){

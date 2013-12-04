@@ -2,22 +2,21 @@
 
   namespace Fiv\Spl;
 
-    //
-    //  $string = 'Test-string_other';
-    //
-    //  # 1
-    //  $new = Fiv\Spl\String::init($string);
-    //  $new->regexMap('![-|_].!', function ($value) {
-    //    return substr(strtoupper($value), 1);
-    //  });
-    //
-    //  # 2
-    //  $new = $string;
-    //  preg_match_all('![-|_](.)!', $string, $match);
-    //  foreach ($match[1] as $name) {
-    //    $new = str_replace('-' . $name, '' . ucfirst($name), $partialFilePath);
-  //  }
-
+  /*
+   * $string = 'Test-string_other';
+   * # 1
+   * $new = Fiv\Spl\String::init($string);
+   * $new->regexMap('![-|_].!', function ($value) {
+   *   return substr(strtoupper($value), 1);
+   * });
+   *
+   * # 2
+   * $new = $string;
+   * preg_match_all('![-|_](.)!', $string, $match);
+   * foreach ($match[1] as $name) {
+   *   $new = str_replace('-' . $name, '' . ucfirst($name), $partialFilePath);
+   * }
+   */
   class String {
 
     /**
@@ -38,10 +37,10 @@
      * \Fiv\Spl\String::init('tel +388')->regexDel('![^\d]!');
      * </code>
      * @param $string
-     * @return Fiv_Spl_String
+     * @return self
      */
     public static function init($string) {
-      return new String($string);
+      return new self($string);
     }
 
     /**
@@ -109,9 +108,9 @@
 
     /**
      * @param string $regex
-     * @param null   $callback
-     * @return Fiv_Spl_String
-     * @throws Exception
+     * @param null $callback
+     * @throws \Exception
+     * @return $this
      */
     public function regexMap($regex, $callback) {
       if (!is_callable($callback)) {
@@ -148,9 +147,9 @@
     }
 
     /**
-     * @param string|array      $from
+     * @param string|array $from
      * @param null|string|array $to
-     * @return Fiv_Spl_String
+     * @return $this
      */
     public function strReplace($from, $to = null) {
       if (is_array($from) and $to === null) {
@@ -165,10 +164,10 @@
     }
 
     /**
-     * @param  string  $explodeSymbol
+     * @param  string $explodeSymbol
      * @param callback $callback
-     * @throws Exception
-     * @return Fiv_Spl_String
+     * @throws \Exception
+     * @return $this
      */
     public function explodeMap($explodeSymbol, $callback) {
       if (!is_callable($callback)) {

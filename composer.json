@@ -1,8 +1,6 @@
 {
   "name": "fiv/spl",
   "description": "Standard library",
-  "require-dev": {
-  },
   "autoload": {
     "psr-0": {
       "Fiv\\Spl\\": "src/"
@@ -16,10 +14,6 @@
     }
   ],
   "require-dev": {
-    "behat/behat": "2.4.*@stable"
-  },
-  "config": {
-    "bin-dir": "bin/"
+    "phpunit/phpunit": "3.7.*"
   }
-
 }

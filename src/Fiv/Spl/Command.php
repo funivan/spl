@@ -506,8 +506,8 @@
 
     /**
      *
-     * @param int  $min
-     * @param int  $max
+     * @param int $min
+     * @param int $max
      * @param bool $output
      */
     public static function pause($min = 0, $max = 0, $output = true) {
