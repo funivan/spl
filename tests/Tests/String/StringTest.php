@@ -1,13 +1,13 @@
 <?php
 
-  namespace SplTests\String;
+  namespace Tests\String;
 
   use Fiv\Spl\String;
 
   /**
-   * @package SplTests\String
+   * @package Tests\String
    */
-  class StringTest extends \SplTests\Main {
+  class StringTest extends \Tests\Main {
 
     public function testInit() {
       $string = String::init('test-123');

@@ -297,12 +297,11 @@
     /**
      * Return array of items connected to this collection
      *
-     * You can use it in foreach for better code suggestion
      * Rewrite this method in you class
      *
      * <code>
-     *   foreach($collection->items() as $item){
-     *    echo get_class($item)."\n;
+     *   foreach($collection->getItems() as $item){
+     *     echo get_class($item)."\n;
      *   }
      * </code>
      * @return object[]
@@ -311,6 +310,15 @@
       return $this->items;
     }
 
+
+    /**
+     * You can use it in foreach for better code suggestion
+     *
+     * @return $this
+     */
+    public function iterate() {
+      return $this;
+    }
 
     /**
      * Check array of objects.

@@ -1,6 +1,6 @@
 <?php
 
-  namespace SplTests;
+  namespace Tests;
 
   /**
    * @package DemoProjectTests
