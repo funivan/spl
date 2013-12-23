@@ -30,7 +30,7 @@
     }
 
     public function __clone() {
-      $items = [];
+      $items = array();
       foreach ($this->items as $item) {
         $items[] = clone $item;
       }
