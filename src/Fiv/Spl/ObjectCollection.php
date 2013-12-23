@@ -16,14 +16,14 @@
     /**
      * Array of objects
      *
-     * @var []
+     * @var array
      */
-    protected $items = [];
+    protected $items = array();
 
     /**
      * @param array $items
      */
-    public function __construct(array $items = []) {
+    public function __construct(array $items = array()) {
       if (!empty($items)) {
         $this->setItems($items);
       }
