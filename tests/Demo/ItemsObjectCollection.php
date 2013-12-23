@@ -1,4 +1,5 @@
-<?
+<?php
+
   namespace Demo;
 
   /**
@@ -8,7 +9,7 @@
 
     /**
      * Used for validation
-     *
+     *     PHP
      * @return string
      */
     public function objectsClassName() {
