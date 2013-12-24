@@ -1,6 +1,6 @@
 <?php
 
-  namespace Tests\String;
+  namespace Tests\Fiv\Spl;
 
   use Fiv\Spl\String;
 

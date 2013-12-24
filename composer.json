@@ -1,20 +1,23 @@
 {
-    "name": "fiv/spl",
-    "description": "Standard library",
-    "autoload": {
-        "psr-0": {
-            "Fiv\\Spl\\": "src/"
-        }
-    },
-    "license": "GPL v2",
-    "authors": [
-        {
-            "name": "Ivan Shcherbak",
-            "email": "dev@funivan.com"
-        }
-    ],
-    "require-dev": {
-        "satooshi/php-coveralls": "v0.6.1",
-        "phpunit/phpunit": "3.7.*"
+  "name": "fiv/spl",
+  "description": "Standard library",
+  "autoload": {
+    "psr-0": {
+      "Fiv\\Spl\\": "src/"
     }
+  },
+  "license": "GPL v2",
+  "authors": [
+    {
+      "name": "Ivan Shcherbak",
+      "email": "dev@funivan.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "v0.6.1",
+    "phpunit/phpunit": "3.7.*"
+  }
 }
