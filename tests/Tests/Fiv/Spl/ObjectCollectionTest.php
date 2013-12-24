@@ -85,6 +85,6 @@
 
       $lastItem = $collection->getLast();
 
-      $this->assertEquals(3, $lastItem);
+      $this->assertEquals(3, $lastItem->i);
     }
   }
