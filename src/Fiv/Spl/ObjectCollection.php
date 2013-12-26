@@ -40,7 +40,9 @@
 
     /**
      * Used for validation
+     * Return class name
      *
+     * @codeCoverageIgnore
      * @return string
      */
     public abstract function objectsClassName();
@@ -67,7 +69,7 @@
 
       $this->validateObject($item, 'You can prepend only object');
 
-      $this->items = array_unshift($this->items, $item);
+      array_unshift($this->items, $item);
       return $this;
     }
 
@@ -93,9 +95,15 @@
      * @throws \Exception
      */
     public function addAfter($index, $items) {
+
       if (!is_array($items)) {
         throw new \Exception('You can add after only array of objects');
       }
+
+      if (!is_int($index)) {
+         throw new \Exception('Invalid type of index. Must be integer');
+      }
+
       $this->validateObjects($items, 'You can add after only objects.');
 
       $offset = $index + 1;

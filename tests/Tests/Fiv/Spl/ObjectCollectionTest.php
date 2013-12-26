@@ -167,7 +167,70 @@
 
     }
 
-    public function testSetItems() {
+    public function testMap() {
+      $collection = $this->getTestCollection();
+      $collection->map(function ($token, $index, $collectionObject) {
+        $token->i++;
+        $this->assertTrue(is_integer($index));
+        $this->assertTrue(is_object($collectionObject));
+      });
+
+      $this->assertEquals(1, $collection->getFirst()->i);
+
+      $error = null;
+      try {
+        $collection->map('invalid_callback_function_name');
+      } catch (\Exception $error) {
+
+      }
+      $this->assertInstanceOf('Exception', $error);
+    }
+
+    public function testPrepend() {
+      $collection = $this->getTestCollection();
+
+      $error = null;
+      try {
+        $collection->prepend('1');
+      } catch (\Exception $error) {
+      }
+      $this->assertInstanceOf('Exception', $error);
+
+      $this->assertEquals(0, $collection->getFirst()->i);
+      $test = new TestObject();
+      $test->custom = 1;
+      $collection->prepend($test);
+
+      $this->assertEquals(1, $collection->getFirst()->custom);
+    }
+
+    public function testAddItems() {
+      $collection = $this->getTestCollection();
+
+      $error = null;
+      try {
+        $collection->addAfter(1, '1');
+      } catch (\Exception $error) {
+      }
+      $this->assertInstanceOf('Exception', $error);
+
+      $error = null;
+      try {
+        $collection->addAfter('1', array(
+          new TestObject()
+        ));
+      } catch (\Exception $error) {
+      }
+      $this->assertInstanceOf('Exception', $error);
+
+      $testObject = new TestObject();
+      $testObject->custom = true;
+      $collection->addAfter(1, array($testObject));
+
+      $this->assertTrue($collection[2]->custom);
+    }
+
+    public function testSetRemoveGetItems() {
       $collection = $this->getTestCollection();
 
       $error = null;
@@ -181,8 +244,19 @@
 
       $this->assertCount(6, $collection);
 
-      $collection[10] = new TestObject();
+      $testObject = new TestObject();
+      $collection[10] = $testObject;
       $this->assertCount(7, $collection);
+      $this->assertTrue(isset($collection[10]));
+      $this->assertEquals($testObject, $collection[10]);
+      unset($collection[10]);
+      $this->assertCount(6, $collection);
+
+      $collection[] = new TestObject();
+      $this->assertCount(7, $collection);
+
+      $this->assertTrue(is_array($collection->getItems()));
+
     }
 
   }
