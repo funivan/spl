@@ -139,6 +139,7 @@
     /**
      * Take part of items and return new collection
      * Works as array_slice
+     * At this point items in 2 collection is same
      *
      * @param int $offset
      * @param null $length
