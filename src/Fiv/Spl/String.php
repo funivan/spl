@@ -90,7 +90,7 @@
     }
 
     /**
-     * @param $regex
+     * @param array|string $regex
      * @return int
      */
     public function regexContain($regex) {
@@ -107,8 +107,8 @@
     }
 
     /**
-     * @param string $regex
-     * @param null $callback
+     * @param string   $regex
+     * @param callback $callback
      * @throws \Exception
      * @return $this
      */
@@ -148,7 +148,7 @@
 
     /**
      * @param string|array $from
-     * @param null|string|array $to
+     * @param null|string  $to
      * @return $this
      */
     public function strReplace($from, $to = null) {
@@ -164,7 +164,7 @@
     }
 
     /**
-     * @param  string $explodeSymbol
+     * @param  string  $explodeSymbol
      * @param callback $callback
      * @throws \Exception
      * @return $this

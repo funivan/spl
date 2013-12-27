@@ -507,8 +507,8 @@
 
     /**
      *
-     * @param int $min
-     * @param int $max
+     * @param int  $min
+     * @param int  $max
      * @param bool $output
      */
     public static function pause($min = 0, $max = 0, $output = true) {
@@ -527,8 +527,7 @@
     }
 
     protected function getRunDir() {
-
-      return '/tmp/' . __NAMESPACE__ . __CLASS__;
+      return '/tmp/' . str_replace('\\', '_', get_called_class());
     }
   }
 
