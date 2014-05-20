@@ -101,7 +101,7 @@
       }
 
       if (!is_int($index)) {
-         throw new \Exception('Invalid type of index. Must be integer');
+        throw new \Exception('Invalid type of index. Must be integer');
       }
 
       $this->validateObjects($items, 'You can add after only objects.');
@@ -339,7 +339,7 @@
     protected function validateObjects(array $items, $message) {
       $itemClass = $this->objectsClassName();
       foreach ($items as $item) {
-        if (get_class($item) != $itemClass) {
+        if (($item instanceof $itemClass) == false) {
           throw new \Exception($message . ' (' . $itemClass . ')');
         }
       }
@@ -353,7 +353,8 @@
      * @throws \Exception
      */
     protected function validateObject($item, $message) {
-      if (get_class($item) != $this->objectsClassName()) {
+      $itemClass = $this->objectsClassName();
+      if (($item instanceof $itemClass) == false) {
         throw new \Exception($message . ' (' . $this->objectsClassName() . ')');
       }
     }
