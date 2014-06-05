@@ -30,7 +30,11 @@
 
       $this->registerArgument('help', 'Show help', 'h');
       $this->registerArgument('run', 'Ignore code suggest and run command immediately', 'r');
-      $this->registerArgument('interactive', 'Run script in interactive mode. Stop ', 'i');
+
+      $availableCompletion = function_exists('readline_completion_function');
+      if ($availableCompletion) {
+        $this->registerArgument('interactive', 'Run script in interactive mode. Stop ', 'i');
+      }
 
       if ($this->restartable) {
         $this->registerArgument('restart', 'Restart service');
@@ -51,18 +55,20 @@
 
       $this->args = $this->convertArguments();
 
-      readline_completion_function(array($this, 'showArgumentSuggest'));
+      if ($availableCompletion) {
+        readline_completion_function(array($this, 'showArgumentSuggest'));
 
-      $interactiveMode = (isset($this->args['interactive']) or isset($this->args['i']));
-      if ($interactiveMode) {
-        while (true) {
-          $argsFromInput = readline("$ ");
-          readline_add_history($argsFromInput);
-          $this->args = $this->convertArguments($argsFromInput);
-          $this->args['interactive'] = true;
-          $this->execute();
+        $interactiveMode = (isset($this->args['interactive']) or isset($this->args['i']));
+        if ($interactiveMode) {
+          while (true) {
+            $argsFromInput = readline("$ ");
+            readline_add_history($argsFromInput);
+            $this->args = $this->convertArguments($argsFromInput);
+            $this->args['interactive'] = true;
+            $this->execute();
+          }
+          die();
         }
-        die();
       }
 
     }
@@ -507,8 +513,8 @@
 
     /**
      *
-     * @param int  $min
-     * @param int  $max
+     * @param int $min
+     * @param int $max
      * @param bool $output
      */
     public static function pause($min = 0, $max = 0, $output = true) {
