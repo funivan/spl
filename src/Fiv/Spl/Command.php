@@ -8,11 +8,11 @@
    */
   abstract class Command {
 
-    protected $args = [];
+    protected $args = array();
 
-    protected $registerArguments = [];
+    protected $registerArguments = array();
 
-    protected $argumentsAlias = [];
+    protected $argumentsAlias = array();
 
     protected $restartable = false;
 
@@ -51,7 +51,7 @@
 
       $this->args = $this->convertArguments();
 
-      readline_completion_function([$this, 'showArgumentSuggest']);
+      readline_completion_function(array($this, 'showArgumentSuggest'));
 
       $interactiveMode = (isset($this->args['interactive']) or isset($this->args['i']));
       if ($interactiveMode) {
@@ -72,8 +72,8 @@
     }
 
     protected function showArgumentSuggest($input, $index) {
-      $fullCommands = [];
-      $shortCommands = [];
+      $fullCommands = array();
+      $shortCommands = array();
       foreach ($this->registerArguments as $command => $info) {
         if (!empty($info['short'])) {
           $shortCommands[] = '-' . $info['short'] . ' ';
@@ -88,10 +88,10 @@
     }
 
     protected function registerArgument($fullName, $description, $shortName = '') {
-      $this->registerArguments[$fullName] = [
+      $this->registerArguments[$fullName] = array(
         'description' => $description,
         'short' => $shortName,
-      ];
+      );
       $this->argumentsAlias[$fullName] = $shortName;
     }
 
@@ -128,12 +128,12 @@
       if (!empty($args) and is_string($args)) {
         $argumentsArray = explode(" ", $args);
       } else {
-        $argumentsArray = $_SERVER['argv'];
+        $argumentsArray = !empty($_SERVER['argv']) ? $_SERVER['argv'] : array();
         unset($argumentsArray[0]);
       }
 
       $argumentsArray = !empty($argumentsArray) ? $argumentsArray : array();
-      $arguments = [];
+      $arguments = array();
       $oneKey = '-([a-zA-Z]+)'; # -r -B -C
       $multipleKeys = '-([a-zA-Z]{2,})'; # -rfsF -ac -dfLOld
       $longKeys = '--([a-zA-Z-]{2,})'; # --file --test
@@ -174,7 +174,7 @@
         }
       }
 
-      $allowCommands = [];
+      $allowCommands = array();
       foreach ($this->registerArguments as $command => $info) {
         $allowCommands[$command] = true;
         if (!empty($info['short'])) {
@@ -460,7 +460,7 @@
 
     protected function showHelp() {
 
-      $help = [];
+      $help = array();
       $maxFirstColumnLen = 0;
       foreach ($this->registerArguments as $command => $info) {
         $commandNames = '--' . $command;
