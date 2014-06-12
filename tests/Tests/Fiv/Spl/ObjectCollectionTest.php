@@ -109,7 +109,7 @@
 
       $this->assertCount(6, $collection);
 
-      foreach ($collection->iterate() as $i => $token) {
+      foreach ($collection as $i => $token) {
         if ($i === 2) {
           $prev = $collection->getPrevious();
           $this->assertEquals(1, $prev->i);
@@ -162,7 +162,7 @@
       $collection->next();
       $this->assertEquals(2, $collection->key());
 
-      $collection->refresh();
+      $collection->rewind();
       $this->assertEquals(0, $collection->key());
 
     }
